@@ -25,19 +25,19 @@ jobs:
   #单个部署作业，因为我们只是部署
   deploy:
     environment:
-      name: github-pages
+      name: github页面
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 完成
         uses: actions/checkout@v4
-      - name: Setup Pages
+      - name: 设置网站
         uses: actions/configure-pages@v5
-      - name: Upload artifact
+      - name: 上传对象
         uses: actions/upload-pages-artifact@v3
         with:
           #上传整个仓库
           path: '.'
-      - name: Deploy to GitHub Pages
+      - name: 部署到GitHub页面
         id: deployment
         uses: actions/deploy-pages@v4
