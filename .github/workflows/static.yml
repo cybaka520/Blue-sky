@@ -1,5 +1,5 @@
-# 将静态内容部署到GitHub Pages的简单工作流程
-name: 将网站部署到Github Pages
+# 将静态内容部署到GitHub Pages
+name: 将网站部署到Github页面
 
 on:
   #在针对默认分支的推送上运行
@@ -15,14 +15,14 @@ permissions:
   pages: write
   id-token: write
 
-#只允许一个并发部署，跳过正在进行的运行和最近排队的运行之间排队的运行。
-#但是，不要取消正在进行的运行，因为希望允许这些生产部署完成。
+#只允许一个并发部署，跳过正在进行的运行和最近排队的运行之间的排队。
+#但是不要取消正在进行的。
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  #单个部署作业，因为我们只是部署
+  #单个部署作业，因为只部署
   deploy:
     environment:
       name: github页面
