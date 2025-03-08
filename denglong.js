@@ -1,10 +1,21 @@
- // 创建并添加元素
- function createDengContainer() {
+// 创建并添加元素
+function createDengContainer() {
     const container = document.createElement('div');
     container.className = 'deng-container';
 
-    // 从当前脚本的 URL 获取参数
-    const scriptSrc = document.currentScript.src;
+    // 获取当前脚本的 URL
+    let scriptSrc = '';
+    const scripts = document.scripts;
+    for (let i = scripts.length - 1; i >= 0; i--) {
+        if (scripts[i].src && scripts[i].readyState === 'interactive') {
+            scriptSrc = scripts[i].src;
+            break;
+        }
+    }
+    if (!scriptSrc) {
+        scriptSrc = document.scripts[document.scripts.length - 1].src;
+    }
+
     const urlParams = new URLSearchParams(scriptSrc.split('?')[1]); // 获取 '?'
     const customText = urlParams.get('text'); // 获取参数名为'text'的值
 
@@ -58,7 +69,7 @@
 function addStyles() {
     const style = document.createElement('style');
     style.type = 'text/css';
-    style.textContent = 
+    style.textContent = `
         .deng-container {
             position: relative;
             top: 10px;
@@ -166,11 +177,11 @@ function addStyles() {
             .deng-box4 { right: -10px; }  
         }
         @keyframes swing { 
-            0% { transform: rotate(-10deg); }  
+             0% { transform: rotate(-10deg); }  
             50% { transform: rotate(10deg); }  
             100% { transform: rotate(-10deg); }  
         }
-    ;
+    `;
     document.head.appendChild(style);
 }
 
